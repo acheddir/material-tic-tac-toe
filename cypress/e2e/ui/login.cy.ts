@@ -1,25 +1,27 @@
 describe("Login", () => {
-  it("should redirect to game page after successful login", () => {
-     cy.visit('/login');
 
-     cy.get('[data-test="signin-username"]').type("admin");
-     cy.get('[data-test="signin-password"]').type("s3cr3t");
+   it("should redirect to game page after successful login", () => {
+      cy.visit('/login');
 
-     cy.get('[data-test="signin-submit"]').click();
+      cy.getByDataCy('signin-username').type("admin");
+      cy.getByDataCy('signin-password').type("s3cr3t");
 
-     cy.location("pathname").should('equal', '/game');
-  });
+      cy.getByDataCy('signin-submit').click();
 
-  it('should log error to console after an unsuccessful login', () => {
-     cy.visit('/login');
+      cy.location("pathname").should('equal', '/game');
+   });
 
-     cy.get('[data-test="signin-username"]').type("admin");
-     cy.get('[data-test="signin-password"]').type("admin");
+   it('should log error to console after an unsuccessful login', () => {
+      cy.visit('/login');
 
-     cy.get('[data-test="signin-submit"]').click();
+      cy.getByDataCy('signin-username').type("admin");
+      cy.getByDataCy('signin-password').type("badPassword");
 
-     cy.get('[data-test="signin-error"]')
-        .should('be.visible')
-        .and('have.text', 'Invalid username or password');
-  });
+      cy.getByDataCy('signin-submit').click();
+
+      cy.getByDataCy('signin-error')
+         .should('be.visible')
+         .and('have.text', 'Invalid username or password');
+   });
+
 });

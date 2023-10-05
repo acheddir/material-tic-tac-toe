@@ -7,8 +7,7 @@
     "exclude": [],
     "compilerOptions": {
         "types": [
-            "cypress",
-            "@percy/cypress"
+            "cypress"
         ],
         "lib": [
             "es2015",
